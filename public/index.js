@@ -20,6 +20,7 @@ function initWebSocket(url, resultsEl) {
   socket.onmessage = message => {
     log("New websocket message received:", message);
     const reading = message.data;
+    // Put our reading, which was sent from the server, into the DOM
     resultsEl.innerHTML = `<h3>Current serial reading: ${reading}<h3>`;
   };
 }
