@@ -21,9 +21,7 @@ const getSerialPortReading = () => floor(random() * 9999);
 
 app.use('/', staticPath);
 
-// So we can clearInterval @ wss.on("close", ...)
-let interval;
-
+let interval; // Scoped so we can clearInterval @ wss.on("close", ...)
 wss.on("connection", (socket) => {
   // Immediately say hi when connection is established
   socket.send("Hello from websocket server!");
