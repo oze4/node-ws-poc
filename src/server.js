@@ -24,7 +24,7 @@ app.use('/', staticPath);
 let interval; // Scoped so we can clearInterval @ wss.on("close", ...)
 wss.on("connection", (socket) => {
   // Immediately say hi when connection is established
-  socket.send("Hello from websocket server!");
+  socket.send("Hello, world! [sent from websocket server]");
 
   // Send our client an updated "reading" every 200ms
   interval = setInterval(() => socket.send(getSerialPortReading()), 200);
