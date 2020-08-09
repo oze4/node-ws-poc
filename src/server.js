@@ -11,7 +11,7 @@ const publicPath = path.resolve(__dirname, "../public");
 const staticPath = express.static(publicPath);
 
 const { log } = console;
-const rand = () => Math.floor(Math.random() * 9999);
+const getSerialPortReading = () => Math.floor(Math.random() * 9999);
 
 app.use('/', staticPath);
 
@@ -20,7 +20,7 @@ wss.on("connection", (socket) => {
   socket.send("Hello from websocket server!");
 
   // Send our client an updated "reading" every 200ms
-  setInterval(() => socket.send(rand()), 200);
+  setInterval(() => socket.send(getSerialPortReading()), 200);
 
   socket.on("message", (message) => {
     log(`Message received from client: ${message}`);
