@@ -1,10 +1,13 @@
-initWebSocket();
+const serialReadingEl = document.getElementById("serial-reading");
+const wsUrl = `ws://${window.location.host}`;
 
-function initWebSocket() {
+initWebSocket(wsUrl, serialReadingEl);
+
+function initWebSocket(url, resultsEl) {
   const { log } = console;
   log("Creating websocket");
 
-  const socket = new WebSocket(`ws://${window.location.host}`);
+  const socket = new WebSocket(url);
 
   socket.onopen = () => {
     log("Websocket is open!");
@@ -13,10 +16,10 @@ function initWebSocket() {
     log("Websocket message sent to server");
   };
 
+  // When a message is received from the server, it is handled here
   socket.onmessage = message => {
     log("New websocket message received:", message);
     const reading = message.data;
-    const serialReadingEl = document.getElementById("serial-reading");
-    serialReadingEl.innerHTML = `<h3>Current serial reading: ${reading}<h3>`;
+    resultsEl.innerHTML = `<h3>Current serial reading: ${reading}<h3>`;
   };
 }
